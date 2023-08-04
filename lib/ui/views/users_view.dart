@@ -21,13 +21,14 @@ class _UsersViewState extends State<UsersView> {
   bool _showPassword = false;
   final _formKey = GlobalKey<FormState>();
   final _nombreController = TextEditingController();
+    final _rolController = TextEditingController();
   final _apellidoController = TextEditingController();
   final _cedulaController = TextEditingController();
   final _correoController = TextEditingController();
   final _direccionController = TextEditingController();
   final _telefonoController = TextEditingController();
   final _passwordController = TextEditingController();
-  List<String> roles = ['ASESOR_ROLE', 'ADMIN_ROLE', 'CLIENTE_ROLE'];
+     final List<String> roles = ['SISTEMA_ROLE', 'ASESOR_ROLE', 'CLIENTE_ROLE', 'ADMIN_ROLE'];
   String? selectedRole = "ASESOR_ROLE";
 
   @override
@@ -104,7 +105,7 @@ class _UsersViewState extends State<UsersView> {
               controller: _nombreController,
               decoration: CustomInputs.formInputDecoration(
                 hint: 'Nombre del usuario', 
-                label: 'Nombre', 
+              //  label: 'Nombre', 
                 icon: Icons.supervised_user_circle_outlined
               ),
              
@@ -119,7 +120,7 @@ class _UsersViewState extends State<UsersView> {
                 controller: _apellidoController,
               decoration: CustomInputs.formInputDecoration(
                 hint: 'Apellido del usuario', 
-                label: 'Apellido', 
+              //  label: 'Apellido', 
                 icon: Icons.supervised_user_circle_outlined
               ),
              
@@ -134,7 +135,7 @@ class _UsersViewState extends State<UsersView> {
                controller: _cedulaController,
               decoration: CustomInputs.formInputDecoration(
                 hint: 'Cédula del usuario', 
-                label: 'Cédula', 
+               // label: 'Cédula', 
                 icon: Icons.supervised_user_circle_outlined
               ),
              
@@ -144,12 +145,31 @@ class _UsersViewState extends State<UsersView> {
                 return null;
               },
             ),
+              SizedBox(height: 20,),
+                 DropdownButtonFormField<String>(
+                                value: user.rol,
+                                decoration: CustomInputs.formInputDecoration(
+                                  hint: 'Rol del usuario', 
+                                  label: 'Rol', 
+                                  icon: Icons.admin_panel_settings
+                                ),
+                                items: roles.map((String role) {
+                                  return DropdownMenuItem<String>(
+                                    value: role,
+                                    child: Text(role),
+                                  );
+                                }).toList(),
+                                onChanged: (value) {
+                                  _rolController.text=value!;
+                                  //userFormProvider.copyUserWith(rol: value);
+                                },
+                              ),
               SizedBox( height: 20 ),
               TextFormField(
                 controller: _direccionController,
               decoration: CustomInputs.formInputDecoration(
                 hint: 'Dirección del usuario', 
-                label: 'Dirección', 
+              //  label: 'Dirección', 
                 icon: Icons.supervised_user_circle_outlined
               ),
             
@@ -164,7 +184,7 @@ class _UsersViewState extends State<UsersView> {
                controller: _telefonoController,
               decoration: CustomInputs.formInputDecoration(
                 hint: 'Teléfono del usuario', 
-                label: 'Teléfono', 
+               /// label: 'Teléfono', 
                 icon: Icons.supervised_user_circle_outlined
               ),
               
@@ -182,7 +202,7 @@ class _UsersViewState extends State<UsersView> {
               controller: _correoController,
               decoration: CustomInputs.formInputDecoration(
                 hint: 'Correo del usuario', 
-                label: 'Correo', 
+                //label: 'Correo', 
                 icon: Icons.mark_email_read_outlined
               ),
             
@@ -200,7 +220,7 @@ class _UsersViewState extends State<UsersView> {
                                           obscureText: !_showPassword,
                                           decoration: CustomInputs.formInputDecoration(
                 hint: 'Contraseña del usuario', 
-                label: 'Contraseña', 
+               // label: 'Contraseña', 
                 icon: Icons.supervised_user_circle_outlined,
                 suffixIcon:  IconButton(
                                               icon: Icon(_showPassword
@@ -245,6 +265,7 @@ class _UsersViewState extends State<UsersView> {
                                         final password = _passwordController.text;
                                         final apellido=_apellidoController.text;
                                         final cedula=_cedulaController.text;
+                                        final rol =_rolController.text;
                              // Imprimir el rol seleccionado
     
                                         await usersProvider.crearCliente(
@@ -253,7 +274,7 @@ class _UsersViewState extends State<UsersView> {
                                             telefono,
                                             nombre,
                                             password,
-                                            "CLIENTE_ROLE",cedula,apellido);
+                                            rol,cedula,apellido);
     
                                         Navigator.pop(
                                             context); // Cerrar el diálogo

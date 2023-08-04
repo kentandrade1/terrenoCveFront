@@ -10,6 +10,7 @@ import '../../models/usuario.dart';
 import '../../providers/auth_provider.dart';
 import '../../router/router.dart';
 import '../buttons/custom_outlined_button.dart';
+import '../inputs/custom_inputs.dart';
 
 class UsersAsesorView extends StatefulWidget {
   @override
@@ -21,6 +22,7 @@ class _UsersAsesorViewState extends State<UsersAsesorView> {
   final _formKey = GlobalKey<FormState>();
   final _nombreController = TextEditingController();
   final _correoController = TextEditingController();
+
   final _direccionController = TextEditingController();
   final _telefonoController = TextEditingController();
   final _passwordController = TextEditingController();
@@ -33,6 +35,7 @@ class _UsersAsesorViewState extends State<UsersAsesorView> {
   Widget build(BuildContext context) {
     final usersProvider = Provider.of<UsersProvider>(context);
     final user = Provider.of<AuthProvider>(context).user!;
+    
     final List<Usuario> usuario = [];
     usersProvider.users.forEach((element) {
       if (element.rol == "CLIENTE_ROLE") {
@@ -100,6 +103,7 @@ class _UsersAsesorViewState extends State<UsersAsesorView> {
                                             return null;
                                           },
                                         ),
+
                                 TextFormField(
                                   controller: _correoController,
                                   decoration: InputDecoration(labelText: 'Correo'),
@@ -120,6 +124,7 @@ class _UsersAsesorViewState extends State<UsersAsesorView> {
                                     return null;
                                   },
                                 ),
+                            
                                  TextFormField(
                                           controller: _telefonoController,
                                           decoration: InputDecoration(

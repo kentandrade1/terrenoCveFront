@@ -59,7 +59,7 @@ class _RessetViewState extends State<RessetView> {
                     style: TextStyle( color: Colors.black ),
                     decoration: CustomInputs.loginInputDecoration(
                       hint: '*********',
-                      label: 'Contraseña',
+                     // label: 'Contraseña',
                       icon: Icons.lock_outline_rounded
                     ),
                   ),

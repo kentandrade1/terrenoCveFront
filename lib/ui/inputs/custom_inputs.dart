@@ -41,7 +41,7 @@ class CustomInputs {
 
   static InputDecoration formInputDecoration({
     required String hint,
-    required String label,
+     String? label,
     required IconData icon,
     Widget? suffixIcon, // Nuevo parámetro para el suffixIcon
   }) {

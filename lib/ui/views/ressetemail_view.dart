@@ -48,7 +48,7 @@ class RessetEmailView extends StatelessWidget {
                       style: TextStyle( color: Colors.black ),
                       decoration: CustomInputs.loginInputDecoration(
                         hint: 'Ingrese su correo',
-                        label: 'Email',
+                       // label: 'Email',
                         icon: Icons.email
                       ),
                     ),
